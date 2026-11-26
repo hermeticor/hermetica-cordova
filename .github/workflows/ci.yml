@@ -14,7 +14,7 @@ jobs:
       - run: |
           spec=$(node -p "require('./package.json').dependencies['@hermeticor/sdk-browser']")
           if ! npm view "@hermeticor/sdk-browser@$spec" version >/dev/null 2>&1; then
-            git clone -q --depth 1 https://github.com/hermeticacomms/hermetica-browser ../browser
+            git clone -q --depth 1 https://github.com/hermeticor/hermetica-browser ../browser
             (cd ../browser && npm install --no-audit --no-fund && npm run build)
             node -e "const f='package.json',p=JSON.parse(require('fs').readFileSync(f));p.dependencies['@hermeticor/sdk-browser']='file:../browser';require('fs').writeFileSync(f,JSON.stringify(p,null,2))"
           fi
